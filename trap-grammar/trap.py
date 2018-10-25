@@ -55,7 +55,7 @@ def trap(lines):
 		if plot.parent:
 			plot.parent = plot.parent.mark
 
-	print(json.dumps(list, default=lambda o: o.__dict__, sort_keys=True, indent=4))
+	print(json.dumps(list, default=lambda o: o.__dict__, ensure_ascii=False, sort_keys=True, indent=4))
 
 
 
@@ -72,7 +72,7 @@ if __name__ == "__main__":
 		lines = f.readlines()
 	
 	if args.text:
-		lines = args.text.split('\n')
+		lines = args.text.split('\r\n')
 
 	trap(lines)
 

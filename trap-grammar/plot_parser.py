@@ -55,7 +55,7 @@ def parser(parent, line):
 		plot = Plot()
 		plot.mark = temp_mark
 		plot.type = temp_type
-		plot.content = temp_content
+		plot.content = temp_content.rstrip()
 		plot.childs = []
 		plot.parent = None
 
