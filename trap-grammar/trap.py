@@ -4,14 +4,13 @@ import json
 import pprint
 from plot_entity import *
 
-list = []
+
 
 def trap(lines):
 	last_level = 1
 	last_plot = None
-
+	list = []
 	for line in lines:
-
 		temp_level = plot_parser.level(line)
 		if temp_level == 1:
 			plot = plot_parser.parser(None, line)
@@ -55,26 +54,12 @@ def trap(lines):
 		if plot.parent:
 			plot.parent = plot.parent.mark
 
-	print(json.dumps(list, default=lambda o: o.__dict__, ensure_ascii=False, sort_keys=True, indent=4))
+	return json.dumps(list, default=lambda o: o.__dict__, ensure_ascii=False, sort_keys=True, indent=4)
 
+def access(text):
+	lines = text.split('\n')
+	return trap(lines)
 
-
-if __name__ == "__main__":
-	parser = argparse.ArgumentParser(description='Trap syntax parsing') 
-	parser.add_argument('-f', '--file', help='The file address to parse the text.')
-	parser.add_argument('-t', '--text', help='Text written in the trap syntax.')
-	args = parser.parse_args()
-
-	lines = None
-
-	if args.file:
-		f = open(args.file, encoding='utf-8')
-		lines = f.readlines()
-	
-	if args.text:
-		lines = args.text.split('\r\n')
-
-	trap(lines)
 
 
 

@@ -4,7 +4,11 @@ public enum ResponseCode {
 
 	SUCCESS("000000", "请求成功"),
 	ERROR("500000", "请求成功"),
-	
+	ERROR_ON_PROCESS("500001", "解析错误"),
+	ERROR_ON_INSERT("500002", "插入失败"),
+	ERROR_ON_LOGIN_INVALID("500003", "登录时效"),
+	ERROR_ON_AUTH_CODE_NOT_EXIST("500004", "验证码不存在"),
+	ERROR_ON_AUTH_CODE_AUTH_FAIL("500005", "验证码错误"),
 	;
 	
 	private String code;

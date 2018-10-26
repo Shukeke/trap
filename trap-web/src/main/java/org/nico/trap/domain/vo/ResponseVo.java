@@ -52,11 +52,11 @@ public class ResponseVo<T> {
 		this.data = data;
 	}
 
-	public final long getTotal() {
+	public final Long getTotal() {
 		return total;
 	}
 
-	public final void setTotal(long total) {
+	public final void setTotal(Long total) {
 		this.total = total;
 	}
 	
