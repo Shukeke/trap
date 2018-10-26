@@ -40,8 +40,9 @@ public class ResponseVo<T> {
 		return msg;
 	}
 
-	public final void setMsg(String msg) {
+	public final ResponseVo<T> setMsg(String msg) {
 		this.msg = msg;
+		return this;
 	}
 
 	public final T getData() {

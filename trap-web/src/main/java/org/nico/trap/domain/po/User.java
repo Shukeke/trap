@@ -29,72 +29,81 @@ public class User {
 		return createTime;
 	}
 
-	public final void setCreateTime(Date createTime) {
+	public final User setCreateTime(Date createTime) {
 		this.createTime = createTime;
+		return this;
 	}
 
 	public final Date getUpdateTime() {
 		return updateTime;
 	}
 
-	public final void setUpdateTime(Date updateTime) {
+	public final User setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+		return this;
 	}
 
 	public final String getRuleId() {
 		return ruleId;
 	}
 
-	public final void setRuleId(String ruleId) {
+	public final User setRuleId(String ruleId) {
 		this.ruleId = ruleId;
+		return this;
 	}
 
 	public final String getRuleType() {
 		return ruleType;
 	}
 
-	public final void setRuleType(String ruleType) {
+	public final User setRuleType(String ruleType) {
 		this.ruleType = ruleType;
+		return this;
 	}
 
 	public final String getRuleName() {
 		return ruleName;
 	}
 
-	public final void setRuleName(String ruleName) {
+	public final User setRuleName(String ruleName) {
 		this.ruleName = ruleName;
+		return this;
 	}
 
 	public final String getId() {
 		return id;
 	}
 
-	public final void setId(String id) {
+	public final User setId(String id) {
 		this.id = id;
+		return this;
 	}
 
 	public final String getNickname() {
 		return nickname;
 	}
 
-	public final void setNickname(String nickname) {
+	public final User setNickname(String nickname) {
 		this.nickname = nickname;
+		return this;
 	}
 
 	public final String getAccount() {
 		return account;
 	}
 
-	public final void setAccount(String account) {
+	public final User setAccount(String account) {
 		this.account = account;
+		return this;
 	}
 
 	public final String getPassword() {
 		return password;
 	}
 
-	public final void setPassword(String password) {
+	public final User setPassword(String password) {
 		this.password = password;
+		return this;
 	}
 	
 }

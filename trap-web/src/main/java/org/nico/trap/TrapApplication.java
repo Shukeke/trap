@@ -8,9 +8,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAutoConfiguration
 @SpringBootApplication
 @EnableTransactionManagement
-public class Application {
+public class TrapApplication {
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(TrapApplication.class, args);
 	}
 }
