@@ -1,18 +1,27 @@
 package org.nico.trap.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.nico.ourbatis.entity.Page;
 import org.nico.trap.domain.po.Game;
+import org.nico.trap.domain.vo.game.GameRestVo;
+import org.nico.trap.domain.vo.user.UserRestVo;
 import org.nico.trap.mapper.GameMapper;
+import org.nico.trap.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 @Service
 public class GameService{
 	
 	@Autowired
 	private GameMapper gameMapper;
+	
+	@Autowired
+	private UserService userService;
 	
 	public Game selectById(String key) {
 		return gameMapper.selectById(key);
@@ -76,6 +85,51 @@ public class GameService{
 
 	public int deleteBatch(List<String> list) {
 		return gameMapper.deleteBatch(list);
+	}
+	
+	/**
+	 * 查询首页的游戏, 之后将会使用elasticsearch代替！
+	 * 
+	 * @param condition title条件搜索
+	 * @return game 列表
+	 */
+	public List<Game> selectHomeGames(String condition){
+		return gameMapper.selectHomeGames(condition);
+	}
+	
+	/**
+	 * 查询指定用户的游戏, 之后将会使用elasticsearch代替！
+	 * 
+	 * @param condition title条件搜索
+	 * @param userId 用户id
+	 * @return game 列表
+	 */
+	public List<Game> selectHomeGamesByUser(String condition, String userId){
+		return gameMapper.selectHomeGamesByUser(condition, userId);
+	}
+	
+	/**
+	 * 获取简单的游戏信息，内部会查询用户信息与游戏信息合并
+	 * 
+	 * @param games 游戏列表
+	 * @return list
+	 */
+	public List<GameRestVo> getGameRestInfo(List<Game> games){
+		if(! CollectionUtils.isEmpty(games)) {
+			final List<GameRestVo> gameRestVoList = new ArrayList<>(games.size());
+			games.forEach(game -> {
+				GameRestVo gameRestVo = CommonUtils.convertPovo(game, GameRestVo.class);
+				UserRestVo userRestVo = userService.selectRestUseInfo(game.getOwnerId());
+				if(userRestVo != null) {
+					gameRestVo.setOwnerHeadUrl(userRestVo.getHeadUrl());
+					gameRestVo.setOwnerNickname(userRestVo.getNickname());
+				}
+				gameRestVoList.add(gameRestVo);
+			});
+			return gameRestVoList;
+		}else {
+			return null;
+		}
 	}
 
 }

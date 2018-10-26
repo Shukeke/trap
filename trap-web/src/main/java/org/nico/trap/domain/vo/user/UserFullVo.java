@@ -1,30 +1,30 @@
-package org.nico.trap.domain.po;
+package org.nico.trap.domain.vo.user;
 
 import java.util.Date;
 
-import org.nico.ourbatis.annotation.RenderPrimary;
+import io.swagger.annotations.ApiModelProperty;
 
-public class User {
+public class UserFullVo {
 	
-	@RenderPrimary
+	@ApiModelProperty(value = "用户ID")
 	private String id;
 	
+	@ApiModelProperty(value = "用户昵称")
 	private String nickname;
 	
+	@ApiModelProperty(value = "用户账户")
 	private String account;
 	
-	private String password;
-	
+	@ApiModelProperty(value = "用户头像")
 	private String headUrl;
 	
-	private String ruleId;
-	
-	private String ruleType;
-	
+	@ApiModelProperty(value = "角色名称")
 	private String ruleName;
 	
+	@ApiModelProperty(value = "创建时间")
 	private Date createTime;
 	
+	@ApiModelProperty(value = "更新时间")
 	private Date updateTime;
 	
 	public String getHeadUrl() {
@@ -39,7 +39,7 @@ public class User {
 		return createTime;
 	}
 
-	public final User setCreateTime(Date createTime) {
+	public final UserFullVo setCreateTime(Date createTime) {
 		this.createTime = createTime;
 		return this;
 	}
@@ -48,26 +48,8 @@ public class User {
 		return updateTime;
 	}
 
-	public final User setUpdateTime(Date updateTime) {
+	public final UserFullVo setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
-		return this;
-	}
-
-	public final String getRuleId() {
-		return ruleId;
-	}
-
-	public final User setRuleId(String ruleId) {
-		this.ruleId = ruleId;
-		return this;
-	}
-
-	public final String getRuleType() {
-		return ruleType;
-	}
-
-	public final User setRuleType(String ruleType) {
-		this.ruleType = ruleType;
 		return this;
 	}
 
@@ -75,7 +57,7 @@ public class User {
 		return ruleName;
 	}
 
-	public final User setRuleName(String ruleName) {
+	public final UserFullVo setRuleName(String ruleName) {
 		this.ruleName = ruleName;
 		return this;
 	}
@@ -84,7 +66,7 @@ public class User {
 		return id;
 	}
 
-	public final User setId(String id) {
+	public final UserFullVo setId(String id) {
 		this.id = id;
 		return this;
 	}
@@ -93,7 +75,7 @@ public class User {
 		return nickname;
 	}
 
-	public final User setNickname(String nickname) {
+	public final UserFullVo setNickname(String nickname) {
 		this.nickname = nickname;
 		return this;
 	}
@@ -102,17 +84,8 @@ public class User {
 		return account;
 	}
 
-	public final User setAccount(String account) {
+	public final UserFullVo setAccount(String account) {
 		this.account = account;
-		return this;
-	}
-
-	public final String getPassword() {
-		return password;
-	}
-
-	public final User setPassword(String password) {
-		this.password = password;
 		return this;
 	}
 	

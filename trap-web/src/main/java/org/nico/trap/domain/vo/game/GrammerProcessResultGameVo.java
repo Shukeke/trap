@@ -2,16 +2,23 @@ package org.nico.trap.domain.vo.game;
 
 import java.util.Arrays;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class GrammerProcessResultGameVo {
 
+	@ApiModelProperty(value = "标记")
 	private String mark;
 	
+	@ApiModelProperty(value = "父标记")
 	private String parent;
 	
+	@ApiModelProperty(value = "类型")
 	private int type;
 	
+	@ApiModelProperty(value = "对话内容")
 	private String content;
 	
+	@ApiModelProperty(value = "子标记")
 	private String[] childs;
 
 	public final String getMark() {

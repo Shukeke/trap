@@ -14,6 +14,7 @@ import org.nico.trap.domain.po.Role;
 import org.nico.trap.domain.po.User;
 import org.nico.trap.domain.vo.ResponseCode;
 import org.nico.trap.domain.vo.ResponseVo;
+import org.nico.trap.domain.vo.user.UserFullVo;
 import org.nico.trap.service.RoleService;
 import org.nico.trap.service.UserService;
 import org.nico.trap.utils.CommonUtils;
@@ -44,13 +45,14 @@ public class UserController {
 
 	@ApiOperation(value = "用户注册")
 	@PostMapping("/register")
-	public ResponseVo<User> register(
+	public ResponseVo<UserFullVo> register(
 			@ApiParam(value = "账户", required = true) @NotNull @RequestParam String account,
 			@ApiParam(value = "密码", required = true) @Pattern(regexp = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,15}$", message = "密码需要由长度为6~15的字母和数字组成") @RequestParam String password,
 			@ApiParam(value = "昵称", required = true) @Length(min = 3, max = 15) @Pattern(regexp = "^[\\u4e00-\\u9fa5_a-zA-Z0-9]+$", message = "昵称只能为字母、汉字或数字") @RequestParam String nickname,
 			@ApiParam(value = "验证码", required = true) @Length(min = SystemConst.MAIL_AUTH_CODE_LENGTH, max = SystemConst.MAIL_AUTH_CODE_LENGTH) @RequestParam String authCode
 			){
 		ResponseCode code = null;
+		UserFullVo userFullVo = null;
 
 		String cacheAuthCode = cacheComponent.get(CacheConst.TRAP_USER_REGISTER_AUTH_CODE + account);
 		if(StringUtils.isNotBlank(cacheAuthCode)) {
@@ -68,6 +70,8 @@ public class UserController {
 
 				int modify = userService.insert(user);
 				if(modify == 1) {
+					userFullVo = CommonUtils.convertPovo(user, UserFullVo.class);
+					
 					code = ResponseCode.SUCCESS;
 					cacheComponent.delete(CacheConst.TRAP_USER_REGISTER_AUTH_CODE + account);
 				}else {
@@ -79,18 +83,18 @@ public class UserController {
 		}else {
 			code = ResponseCode.ERROR_ON_AUTH_CODE_NOT_EXIST;
 		}
-		return new ResponseVo<>(code);
+		return new ResponseVo<>(code, userFullVo);
 	}
 
 	@ApiOperation(value = "用户登录")
 	@PostMapping("/login")
-	public ResponseVo<User> login(
+	public ResponseVo<UserFullVo> login(
 			@ApiParam(value = "账户", required = true) @NotNull @RequestParam String account,
 			@ApiParam(value = "密码", required = true) @NotNull @RequestParam String password,
 			@ApiParam(value = "验证码", required = false) @RequestParam(required = false) String authCode
 			){
 		ResponseCode code = null;
-		User user = null;
+		UserFullVo userFullVo = null;
 		
 		String failCountCache = cacheComponent.get(CacheConst.TRAP_USER_PASSWORD_FAIL_COUNT + account);
 
@@ -113,9 +117,11 @@ public class UserController {
 		}
 		
 		if(access) {
-			user = userService.selectEntity(new User().setAccount(account));
+			User user = userService.selectEntity(new User().setAccount(account));
 			if(user != null) {
 				if(user.getPassword().equalsIgnoreCase(EncryptUtils.encode(password))) {
+					userFullVo = CommonUtils.convertPovo(user, UserFullVo.class);
+					
 					cacheComponent.delete(CacheConst.TRAP_USER_PASSWORD_FAIL_COUNT + account);
 					code = ResponseCode.SUCCESS;
 				}else {
@@ -128,7 +134,7 @@ public class UserController {
 			}
 		}
 				
-		return new ResponseVo<>(code, user);
+		return new ResponseVo<>(code, userFullVo);
 	}
 
 

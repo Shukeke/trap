@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 @RestController
@@ -31,6 +32,7 @@ public class MailController {
 	@Autowired
 	private CacheComponent cacheComponent;
 	
+	@ApiOperation(value = "发送业务邮件")
 	@PostMapping("/business/send")
 	public ResponseVo<String> send(
 			@ApiParam(value = "账户", required = true) @Pattern(regexp = "^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z0-9]+$", message = "不符合邮箱格式") @RequestParam String account,

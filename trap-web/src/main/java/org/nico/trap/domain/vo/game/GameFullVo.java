@@ -2,28 +2,70 @@ package org.nico.trap.domain.vo.game;
 
 import java.util.Date;
 
-import org.nico.ourbatis.annotation.RenderPrimary;
+import io.swagger.annotations.ApiModelProperty;
 
-public class GameVo {
-	
+public class GameFullVo {
+
+	@ApiModelProperty(value = "游戏ID")
+	private String id;
+
+	@ApiModelProperty(value = "所有者ID")
 	private String ownerId;
-	
+
+	@ApiModelProperty(value = "所有者昵称")
+	private String ownerNickname;
+
+	@ApiModelProperty(value = "所有者头像")
+	private String ownerHeadUrl;
+
+	@ApiModelProperty(value = "游戏内容")
 	private String content;
-	
+
+	@ApiModelProperty(value = "游戏介绍")
 	private String introduce;
-	
+
+	@ApiModelProperty(value = "封面图片地址")
 	private String cover;
-	
+
+	@ApiModelProperty(value = "游戏标题")
 	private String title;
-	
+
+	@ApiModelProperty(value = "游戏类型")
 	private String gameTypeId;
-	
+
+	@ApiModelProperty(value = "游戏类型名称")
 	private String gameTypeName;
-	
+
+	@ApiModelProperty(value = "创建时间")
 	private Date createTime;
-	
+
+	@ApiModelProperty(value = "更新时间")
 	private Date updateTime;
-	
+
+	public String getOwnerNickname() {
+		return ownerNickname;
+	}
+
+	public void setOwnerNickname(String ownerNickname) {
+		this.ownerNickname = ownerNickname;
+	}
+
+	public String getOwnerHeadUrl() {
+		return ownerHeadUrl;
+	}
+
+	public void setOwnerHeadUrl(String ownerHeadUrl) {
+		this.ownerHeadUrl = ownerHeadUrl;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public final Date getCreateTime() {
 		return createTime;
 	}
@@ -39,7 +81,7 @@ public class GameVo {
 	public final void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
-	
+
 	public final String getGameTypeId() {
 		return gameTypeId;
 	}

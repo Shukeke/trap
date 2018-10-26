@@ -2,8 +2,10 @@ package org.nico.trap.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.nico.ourbatis.entity.Page;
 import org.nico.trap.domain.po.User;
+import org.nico.trap.domain.vo.user.UserRestVo;
 import org.nico.trap.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,4 +80,16 @@ public class UserService{
 		return userMapper.deleteBatch(list);
 	}
 
+	/**
+	 * 通过userId查询用户简单信息
+	 * 	- 头像
+	 * 	- 昵称
+	 * 
+	 * @param userId 用户Id
+	 * @return {@link UserRestVo}
+	 */
+	public UserRestVo selectRestUseInfo(String userId) {
+		return userMapper.selectRestUseInfo(userId);
+	}
+	
 }
